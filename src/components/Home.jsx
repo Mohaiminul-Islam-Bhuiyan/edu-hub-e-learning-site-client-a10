@@ -1,9 +1,11 @@
 import React from 'react';
+import Lottie from 'lottie-react'
+import education from '../assets/education.json'
 
 const Home = () => {
     return (
         <div>
-            <h1>this is home page</h1>
+            <Lottie animationData={education}></Lottie>
         </div>
     );
 };
