@@ -1,9 +1,25 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LeftSideNavbar = () => {
+    const [courses, setCourses] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/courses')
+        .then(res => res.json())
+        .then(data => setCourses(data))
+    }, [])
+
     return (
         <div>
-            <h1>this is left side navbar</h1>
+            <h1 className='mb-5'>All Courses: {courses.length}</h1>
+            <div>
+                {
+                    courses.map(course => <p key={course.id}><Link to={`/courses/${course.id}`}><button className="btn btn-primary mb-5">{course.name}</button></Link></p>)
+                }
+            </div>
         </div>
     );
 };

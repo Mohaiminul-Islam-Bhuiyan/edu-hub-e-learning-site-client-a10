@@ -4,7 +4,7 @@ import LeftSideNavbar from './LeftSideNavbar';
 
 const CourseDetails = () => {
     const details = useLoaderData()
-    const { id, fee, picture, name, instructor, about } = details
+    const { fee, picture, name, instructor, about } = details
     return (
         <div className='flex m-5'>
             <div className='grow-0 mr-3'>
