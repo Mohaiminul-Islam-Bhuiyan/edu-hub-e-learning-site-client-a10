@@ -4,8 +4,15 @@ import { useContext } from 'react';
 import { HiAcademicCap } from "react-icons/hi";
 import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../contexts/UserContext';
+import { useState } from 'react';
 
 const Header = () => {
+
+  const [theme, setTheme] = useState()
+
+  const toggleTheme = () => {
+    setTheme(!theme)
+  }
 
   const { user, logout } = useContext(AuthContext)
 
@@ -35,7 +42,11 @@ const Header = () => {
 
           {
             user?.email ? (
-              <button onClick={handleLogout} className="btn btn-outline btn-error">Logout</button>
+              <>
+                <button onClick={handleLogout} className="btn btn-outline btn-error">Logout</button>
+
+                <img className=' border mx-3 w-10 h-10 rounded-full bg-gray-500 border-gray-700' src={user?.photoURL ? user.photoURL : 'NoImg'} alt="" />
+              </>
             )
               :
               (
@@ -45,6 +56,10 @@ const Header = () => {
                 </>
               )
           }
+
+          <div>
+            <button onClick={toggleTheme}> {!theme ? "Light" : 'Dark'} </button>
+          </div>
         </ul>
       </div>
     </div>
