@@ -1,39 +1,85 @@
 import React from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import {Link} from 'react-router-dom'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/UserContext';
 
 const Login = () => {
+    const [userEmail, setUserEmail] = useState('')
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from =location.state?.from?.pathname || '/'
+    
+    const {signIn, resetPassword, signInWithGoogle} = useContext(AuthContext)
+
+    const handleSubmit = event => {
+        event.preventDefault()
+    
+        const email = event.target.email.value
+        const password = event.target.password.value
+    
+        signIn(email, password)
+          .then(result => {
+            toast.success('Login Successful !')
+            navigate(from, { replace: true })
+            console.log(result.user)
+          })
+          .catch(error => toast.error(error.message))
+      }
+    
+      // Google Signin
+      const handleGoogleSignin = () => {
+        signInWithGoogle().then(result => {
+          console.log(result.user)
+          navigate(from, { replace: true })
+        })
+      }
+    
+      //Reset Pass
+      const handleReset = () => {
+        resetPassword(userEmail)
+          .then(() => {
+            toast.success('Reset link has been sent, please check email')
+          })
+          .catch(error => toast.error(error.message))
+      }
+
     return (
         <div className='ml-40 mr-40 mt-20 md:mx-96'>
             <div className="">
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                            Email
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+                        <input onBlur={event => setUserEmail(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name='email' type="email" placeholder="Please enter your email" />
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
-                        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" />
+                        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******************" />
                         <p className="text-red-500 text-xs italic">Please choose a password.</p>
                     </div>
                     <div className="flex items-center justify-between mb-3">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Log In
                         </button>
-                        <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                        <button
+                        onClick={handleReset}
+                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
                             Forgot Password?
-                        </a>
+                        </button>
                     </div>
                     <div>
                         <p>Login with</p>
                         <div className="flex items-center justify-around mb-3">
-                            <FcGoogle></FcGoogle>
-                            <FaGithub></FaGithub>
+                            <button onClick={handleGoogleSignin}><FcGoogle></FcGoogle></button> 
+                            <button><FaGithub></FaGithub></button>
                         </div>
                     </div>
                     <p className='text-sm'>Don't have an account? Please <Link to= '/register' className='font-bold  text-blue-500 hover:text-blue-800'>Register</Link></p>

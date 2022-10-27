@@ -13,7 +13,7 @@ const CourseDetails = () => {
     return (
         <>
         <div>
-            <h1>You are seeing details about : <span className='font-extrabold'>{name}</span><ReactToPrint
+            <h1>You are seeing details about course on : <span className='font-extrabold'>{name}</span><ReactToPrint
             trigger={() => <button className="btn btn-primary ml-5"><FaFileDownload></FaFileDownload></button>}
             content={() => componentRef.current}
         />
