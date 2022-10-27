@@ -7,7 +7,7 @@ const CheckOut = () => {
 
     return (
         <div>
-            <p className='text-2xl mt-20'>You are going to buy: </p>
+            <p className='text-2xl mt-20'>You are going to buy the course: </p>
             <br />
             <h3 className='text-5xl'>{name}</h3>
             <p className='text-2xl'>for only</p>
