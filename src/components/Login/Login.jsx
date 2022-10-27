@@ -1,4 +1,6 @@
 import React from 'react';
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import {Link} from 'react-router-dom'
 
 const Login = () => {
@@ -26,6 +28,13 @@ const Login = () => {
                         <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a>
+                    </div>
+                    <div>
+                        <p>Login with</p>
+                        <div className="flex items-center justify-around mb-3">
+                            <FcGoogle></FcGoogle>
+                            <FaGithub></FaGithub>
+                        </div>
                     </div>
                     <p className='text-sm'>Don't have an account? Please <Link to= '/register' className='font-bold  text-blue-500 hover:text-blue-800'>Register</Link></p>
                 </form>

@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 const LeftSideNavbar = () => {
     const [courses, setCourses] = useState([])
 
-    useEffect(()=>{
-        fetch('http://localhost:5000/courses')
-        .then(res => res.json())
-        .then(data => setCourses(data))
+    useEffect(() => {
+        fetch('https://assignment-ten-sever.vercel.app/courses')
+            .then(res => res.json())
+            .then(data => setCourses(data))
     }, [])
 
     return (

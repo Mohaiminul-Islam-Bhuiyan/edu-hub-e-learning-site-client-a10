@@ -17,6 +17,7 @@ const Header = () => {
   <div className="flex-none">
     <ul className="menu menu-horizontal p-0">
       <li><NavLink to='/home'>Home</NavLink></li>
+      <li><NavLink to='/courses'>Courses</NavLink></li>
       <li><NavLink to='/FAQ'>FAQ</NavLink></li>
       <li><NavLink to='/blog'>Blog</NavLink></li>
       <li><NavLink to='/login'>Login</NavLink></li>

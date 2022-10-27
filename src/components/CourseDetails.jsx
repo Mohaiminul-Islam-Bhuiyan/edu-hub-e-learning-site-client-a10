@@ -4,6 +4,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { Link, useLoaderData } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import LeftSideNavbar from './LeftSideNavbar';
+import { FaFileDownload } from "react-icons/fa";
 
 const CourseDetails = () => {
     const componentRef = useRef()
@@ -11,6 +12,13 @@ const CourseDetails = () => {
     const { id, fee, picture, name, instructor, about, duration } = details
     return (
         <>
+        <div>
+            <h1>You are seeing details about : <span className='font-extrabold'>{name}</span><ReactToPrint
+            trigger={() => <button className="btn btn-primary ml-5"><FaFileDownload></FaFileDownload></button>}
+            content={() => componentRef.current}
+        />
+        </h1>
+        </div>
         <div className='flex m-5'>
             <div className='grow-0 mr-3'>
                 <LeftSideNavbar></LeftSideNavbar>
@@ -32,14 +40,9 @@ const CourseDetails = () => {
             </div>
         </div>
         <div>
-       <div>
-       <ReactToPrint
-            trigger={() => <button className="btn btn-wide btn-primary mt-5">Print this page</button>}
-            content={() => componentRef.current}
-        />
-       </div>
+
         <>
-        <button className="btn btn-wide btn-primary mt-5 mb-5"><Link to={`/courses/${id}/checkout`}>Checkout</Link><FaArrowRight></FaArrowRight></button>
+        <button className="btn btn-wide btn-primary mt-5 mb-5"><Link to={`/courses/${id}/checkout`}>Get premium access</Link><FaArrowRight></FaArrowRight></button>
         </>
     </div>
     </>
