@@ -1,5 +1,6 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+import { Link, useLoaderData } from 'react-router-dom';
 import LeftSideNavbar from './LeftSideNavbar';
 
 const CourseDetails = () => {
@@ -20,6 +21,7 @@ const CourseDetails = () => {
                     </div>
                     <div className='my-auto mx-5'>
                         <h3>{about}</h3>
+                        <button className="btn btn-wide btn-primary mt-5"><Link to='/checkout'>Checkout</Link><FaArrowRight></FaArrowRight></button>
                     </div>
                 </div>
             </div>
