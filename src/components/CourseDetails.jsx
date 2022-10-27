@@ -20,7 +20,7 @@ const CourseDetails = () => {
                     <div>
                         <img src={picture} alt="" />
                         <h2>{name}</h2>
-                        <p>{instructor}</p>
+                        <p>Instructor: {instructor}</p>
                         <p><small>Duration: {duration} months</small></p>
                         <p><small>{fee}</small></p>
                     </div>

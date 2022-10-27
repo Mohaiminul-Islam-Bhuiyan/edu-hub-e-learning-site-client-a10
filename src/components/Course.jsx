@@ -16,7 +16,7 @@ const Course = ({ course }) => {
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">{name}</h2>
-                        <p>{instructor}</p>
+                        <p>By: {instructor}</p>
                         <p>Duration: {duration} months</p>
                         <p>{fee}</p>
                         <div className="card-actions">
