@@ -5,7 +5,7 @@ import LeftSideNavbar from './LeftSideNavbar';
 
 const CourseDetails = () => {
     const details = useLoaderData()
-    const { fee, picture, name, instructor, about } = details
+    const { fee, picture, name, instructor, about, duration } = details
     return (
         <div className='flex m-5'>
             <div className='grow-0 mr-3'>
@@ -17,6 +17,7 @@ const CourseDetails = () => {
                         <img src={picture} alt="" />
                         <h2>{name}</h2>
                         <p>{instructor}</p>
+                        <p><small>Duration: {duration} months</small></p>
                         <p><small>{fee}</small></p>
                     </div>
                     <div className='my-auto mx-5'>
