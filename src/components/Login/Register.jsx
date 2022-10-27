@@ -1,4 +1,6 @@
 import React from 'react';
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import { toast } from 'react-toastify'
 import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -9,7 +11,23 @@ const Register = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
-    const {createUser, updateName, verifyEmail, } = useContext(AuthContext)
+    const {createUser, updateName, verifyEmail, signInWithGoogle, signInWithGithub} = useContext(AuthContext)
+
+      // Google Signin
+      const handleGoogleSignin = () => {
+        signInWithGoogle().then(result => {
+          console.log(result.user)
+          navigate(from, { replace: true })
+        })
+      }
+
+       //Github signin
+       const handleGithubSignin = () => {
+        signInWithGithub().then(result => {
+            toast.success('signed in with github')
+            navigate(from, {replace: true})
+        })
+      }
 
     // signup using email and pass
     const handleSubmit = event => {
@@ -80,8 +98,12 @@ const Register = () => {
                         <button className="mb-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Register
                         </button>
+                        <p>Login with</p>
+                        <button className='mr-4' onClick={handleGoogleSignin}><FcGoogle></FcGoogle></button>
+                        <button onClick={handleGithubSignin}><FaGithub></FaGithub></button>
                         <p className='text-sm'>Already have an account? Please <Link to='/login' className='font-bold  text-blue-500 hover:text-blue-800'>Login</Link></p>
                     </form>
+                    
                     <p className="text-center text-gray-500 text-xs">
                         &copy;2022 EduHub. All rights reserved.
                     </p>

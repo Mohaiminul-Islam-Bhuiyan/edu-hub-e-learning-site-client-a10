@@ -14,7 +14,7 @@ const Login = () => {
 
     const from =location.state?.from?.pathname || '/'
     
-    const {signIn, resetPassword, signInWithGoogle} = useContext(AuthContext)
+    const {signIn, resetPassword, signInWithGoogle, signInWithGithub} = useContext(AuthContext)
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -36,6 +36,14 @@ const Login = () => {
         signInWithGoogle().then(result => {
           console.log(result.user)
           navigate(from, { replace: true })
+        })
+      }
+
+      //Github signin
+      const handleGithubSignin = () => {
+        signInWithGithub().then(result => {
+            toast.success('signed in with github')
+            navigate(from, {replace: true})
         })
       }
     
@@ -62,8 +70,7 @@ const Login = () => {
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
-                        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******************" />
-                        <p className="text-red-500 text-xs italic">Please choose a password.</p>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******************" />
                     </div>
                     <div className="flex items-center justify-between mb-3">
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
@@ -77,9 +84,9 @@ const Login = () => {
                     </div>
                     <div>
                         <p>Login with</p>
-                        <div className="flex items-center justify-around mb-3">
-                            <button onClick={handleGoogleSignin}><FcGoogle></FcGoogle></button> 
-                            <button><FaGithub></FaGithub></button>
+                        <div className="mb-3">
+                            <button className='mr-4' onClick={handleGoogleSignin}><FcGoogle></FcGoogle></button> 
+                            <button onClick={handleGithubSignin}><FaGithub></FaGithub></button>
                         </div>
                     </div>
                     <p className='text-sm'>Don't have an account? Please <Link to= '/register' className='font-bold  text-blue-500 hover:text-blue-800'>Register</Link></p>
